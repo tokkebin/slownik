@@ -13,8 +13,8 @@ struct Node
 
 	//struktura pelniaca role hasla w slowniku, majaca na celu przechowanie klucza i wartosci
 	//oraz wskazania na prawe i lewe dziecko
-	struct Node<KeyType, ValueType>* right = nullptr;
-	struct Node<KeyType, ValueType>* left = nullptr;
+	struct Node<KeyType, ValueType>* right = NULL;
+	struct Node<KeyType, ValueType>* left = NULL;
 	KeyType key;
 	ValueType value;
 
@@ -56,7 +56,7 @@ public:
 			splay(root, key);
 			if (root->key > key)
 			{
-				Node<KeyType, ValueType>* node = new Node<KeyType, ValueType>;
+				Node<key_type, value_type>* node = new Node<key_type, value_type>;
 				node->right = root;
 				node->left = root->left;
 				root->left = nullptr;
@@ -66,7 +66,7 @@ public:
 			}
 			else if (root->key < key)
 			{
-				Node<KeyType, ValueType>* node = new  Node<KeyType, ValueType>;
+				Node<key_type, value_type>* node = new  Node<key_type, value_type>;
 				node->left = root;
 				node->right = root->right;
 				root->right = nullptr;
@@ -97,8 +97,8 @@ public:
 			{
 				if (root->value != value)
 					cout << "Nie istnieje element o zadanym kluczu i wartosci" << endl;
-				Node<KeyType, ValueType>* tempL = nullptr;
-				Node<KeyType, ValueType>* tempR = nullptr;
+				Node<key_type, value_type>* tempL = nullptr;
+				Node<key_type, value_type>* tempR = nullptr;
 
 				tempL = root->left;
 				tempR = root->right;
@@ -129,7 +129,7 @@ public:
 	/*
 	*metoda wyswietlajaca elementy slownika
 	*/
-	void display(Node<KeyType, ValueType>*& root)
+	void display(Node<key_type, value_type>*& root)
 	{
 		if (!root) //sprawdzenie czy slownik ma zawartosc
 			cout << "Slownik pusty" << endl;
@@ -146,7 +146,7 @@ public:
 
 	void show()
 	{
-		display(this->root);
+		display(root);
 	}
 
     bool compare_nodes(Node<key_type,value_type>* root1, Node<key_type,value_type>* root2)
@@ -386,7 +386,7 @@ private:
 
 	//funkcja usuwajaca wexel wraz z dziecmi
 
-	void destroy(Node<KeyType, ValueType>* root)
+	void destroy(Node<KeyType,ValueType >*& root)
 	{
 		if (root)
 		{
@@ -405,7 +405,7 @@ private:
 };
 
 #include "test.h"
-#include "../histogram/project2/histogram.h"
+#include "histogram.h"
 
 int main()
 {

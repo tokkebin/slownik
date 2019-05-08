@@ -61,7 +61,7 @@ void test_int()
 
 
 }
-#include "../histogram/project2/histogram.h"
+#include "histogram.h"
 void test_hist()
 {
     MultiSlownik<histogram,histogram> dict_his;
@@ -102,14 +102,14 @@ void test_hist()
 
 
 
-	MultiSlownik<histogram, histogram> dict1;
-    dict1.insert(hist3, hist4);
-    dict1.insert(hist1, hist2);
-    assert(dict1.compare_dict(dict_his,dict1)==false);
+	MultiSlownik<histogram, histogram> dict_his1;
+    dict_his1.insert(hist3, hist4);
+    dict_his1.insert(hist1, hist2);
+    assert(dict_his1.compare_dict(dict_his,dict_his1)==false);
     //cout<<dict1.compare_dict(dict,dict1)<<endl;
 
-	MultiSlownik<histogram, histogram> dict2;
-    dict2.insert(hist1, hist2);
-    assert(dict2.compare_dict(dict_his,dict2)==true);
+	MultiSlownik<histogram, histogram> dict_his2;
+    dict_his2.insert(hist1, hist2);
+    assert(dict_his2.compare_dict(dict_his,dict_his2)==true);
 
 }

@@ -1,17 +1,17 @@
 # depslib dependency file v1.0
-1557341609 source:c:\users\magdalena\documents\github\slownik\main.cpp
+1557346019 source:c:\users\magdalena\documents\github\slownik\main.cpp
 	<iostream>
 	<string>
 	<sstream>
 	<cassert>
 	"test.h"
-	"../histogram/project2/histogram.h"
+	"histogram.h"
 
-1557341649 c:\users\magdalena\documents\github\slownik\test.h
+1557346234 c:\users\magdalena\documents\github\slownik\test.h
 	<cassert>
 	<string>
 	<iostream>
-	"../histogram/project2/histogram.h"
+	"histogram.h"
 
 1557337450 source:c:\users\magdalena\documents\github\histogram\project2\histogram.cpp
 	"histogram.h"
@@ -22,6 +22,19 @@
 	<stdlib.h>
 
 1557336601 c:\users\magdalena\documents\github\histogram\project2\histogram.h
+	<iostream>
+	<string>
+	<fstream>
+
+1557337450 source:c:\users\magdalena\documents\github\slownik\histogram.cpp
+	"histogram.h"
+	<iostream>
+	<string>
+	<sstream>
+	<stdio.h>
+	<stdlib.h>
+
+1557336601 c:\users\magdalena\documents\github\slownik\histogram.h
 	<iostream>
 	<string>
 	<fstream>
