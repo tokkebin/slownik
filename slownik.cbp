@@ -3,6 +3,7 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="slownik" />
+		<Option makefile="makefile" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -32,8 +33,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="../histogram/project2/histogram.cpp" />
-		<Unit filename="../histogram/project2/histogram.h" />
+		<Unit filename="histogram.cpp" />
+		<Unit filename="histogram.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="test.h" />
 		<Extensions>

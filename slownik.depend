@@ -1,13 +1,14 @@
 # depslib dependency file v1.0
-1557346019 source:c:\users\magdalena\documents\github\slownik\main.cpp
+1557378586 source:c:\users\magdalena\documents\github\slownik\main.cpp
 	<iostream>
 	<string>
 	<sstream>
 	<cassert>
+	<cstddef>
 	"test.h"
 	"histogram.h"
 
-1557346234 c:\users\magdalena\documents\github\slownik\test.h
+1557378917 c:\users\magdalena\documents\github\slownik\test.h
 	<cassert>
 	<string>
 	<iostream>

@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <cassert>
+#include <cstddef>
 
 
 using namespace std;
@@ -20,17 +21,16 @@ struct Node
 
 };
 
-template<typename KeyType, typename ValueType>
-class MultiSlownik
+template<typename KeyType, typename ValueType>class MultiSlownik
 {
 public:
 
-	using key_type = KeyType;
-	using value_type = ValueType;
+	//using key_type = KeyType;
+	//using value_type = ValueType;
 	MultiSlownik()
 	{
 		//kontruktor trywialny
-		root = nullptr;
+		root = NULL;
 		elements = 0;
 	}
 	~MultiSlownik()
@@ -40,14 +40,14 @@ public:
 
 	}
 
-	void insert(key_type key, value_type value)
+	void insert(KeyType key, ValueType value)
 	{
 
 		if (!root)
 		{
-			root = new Node<key_type, value_type>;
-			root->left = nullptr;
-			root->right = nullptr;
+			root = new Node<KeyType, ValueType>;
+			root->left = NULL;
+			root->right = NULL;
 			root->key = key;
 			root->value = value;
 		}
@@ -56,20 +56,20 @@ public:
 			splay(root, key);
 			if (root->key > key)
 			{
-				Node<key_type, value_type>* node = new Node<key_type, value_type>;
+				Node<KeyType, ValueType>* node = new Node<KeyType, ValueType>;
 				node->right = root;
 				node->left = root->left;
-				root->left = nullptr;
+				root->left = NULL;
 				node->key = key;
 				node->value = value;
 				root = node;
 			}
 			else if (root->key < key)
 			{
-				Node<key_type, value_type>* node = new  Node<key_type, value_type>;
+				Node<KeyType, ValueType>* node = new  Node<KeyType, ValueType>;
 				node->left = root;
 				node->right = root->right;
-				root->right = nullptr;
+				root->right = NULL;
 				node->key = key;
 				node->value = value;
 				root = node;
@@ -88,7 +88,7 @@ public:
 	/*
 	*usuniecie wezla o zadanym kluczu i wartosci
 	*/
-	void delete_node(key_type& key, value_type& value)
+	void delete_node(KeyType key, ValueType value)
 	{
 		if (!(root->key == key))
 		{
@@ -97,13 +97,14 @@ public:
 			{
 				if (root->value != value)
 					cout << "Nie istnieje element o zadanym kluczu i wartosci" << endl;
-				Node<key_type, value_type>* tempL = nullptr;
-				Node<key_type, value_type>* tempR = nullptr;
+				Node<KeyType, ValueType>* tempL;
+				Node<KeyType, ValueType>* tempR;
 
 				tempL = root->left;
 				tempR = root->right;
 				delete root;
-				root = nullptr;
+				elements--;
+				root = NULL;
 				if (tempL)//sprawdzenie istnienia lewego poddrzewa
 				{
 					splay(tempL, key); //do korzenia lewe dziecko
@@ -129,7 +130,7 @@ public:
 	/*
 	*metoda wyswietlajaca elementy slownika
 	*/
-	void display(Node<key_type, value_type>*& root)
+	void display(Node<KeyType, ValueType>*& root)
 	{
 		if (!root) //sprawdzenie czy slownik ma zawartosc
 			cout << "Slownik pusty" << endl;
@@ -149,7 +150,12 @@ public:
 		display(root);
 	}
 
-    bool compare_nodes(Node<key_type,value_type>* root1, Node<key_type,value_type>* root2)
+	Node<KeyType,ValueType> showroot(Node<KeyType,ValueType>* root)
+	{
+	    return this->root;
+	}
+
+    bool compare_nodes(Node<KeyType,ValueType>* root1, Node<KeyType,ValueType>* root2)
     {
         if(root1->key == root2->key)
             {
@@ -176,7 +182,7 @@ public:
 	/*!
 	 * zwraca wartosc dla podanego klucza
 	 */
-	value_type& value(key_type key) const
+	ValueType& value(KeyType key) const
 	{
 		//szukamy wezla w drzewie splay z kluczem key, ktory zostanie przemieszczony do korzenia
 		splay(root, key);
@@ -190,16 +196,16 @@ public:
 		zmienia wartosc dla podanego klucza
 	*/
 
-	void change_value(const key_type& key, const value_type& new_value)
+	void change_value(const KeyType& key, const ValueType& new_value)
 	{
-		value_type& temp = value(key);
+		//value_type& temp = value(key);
 
 	}
 
 	/*!
 	 * zwraca informacje, czy istnieje w slowniku podany klucz
 	 */
-	bool contains(key_type key)
+	bool contains(KeyType key)
 	{
 		if (!root)
 			return false;
@@ -232,38 +238,37 @@ public:
 	//operator wypisania elementow slownika w konsoli
 	friend ostream& operator <<(ostream& os,  MultiSlownik<KeyType, ValueType>& slownik)
 	{
-		os << slownik.root->key<<" "<<slownik.root->value << endl;
+        os<<"Wielkosc slownika: "<<slownik.size()<<endl;
+        slownik.show();
+        return os;
 	}
 	//operator porownania dwoch slownikow
-	/*friend bool operator ==(MultiSlownik<KeyType, ValueType>& slownik1, MultiSlownik<KeyType, ValueType>& slownik2)
+	friend bool operator ==(MultiSlownik<KeyType, ValueType>& slownik1, MultiSlownik<KeyType, ValueType>& slownik2)
 	{
-		if (slownik1.size == slownik2.size)
-		{
-
-		}
-	}*/
+		return slownik1.compare_dict(slownik1,slownik2);
+	}
 
 	/*!
 	 * zwraca referencje na wartosc dla podanego klucza
 	 * jezeli elementu nie ma w slowniku, dodaje go
 	 */
-	value_type& operator[](const key_type& key)
+	ValueType& operator[](const KeyType& key)
 	{
 		splay(root, key);
 		if (root->key != key)
 		{
-			value_type value;
+			ValueType value;
 			insert(key, value);
 		}
 		return root->value;
 	}
 
 private:
-	mutable Node<key_type, value_type>* root;
+	mutable Node<KeyType,ValueType>* root;
 	int elements;
 
 
-	void splay(Node<KeyType, ValueType>*& root, key_type key) const
+	void splay(Node<KeyType, ValueType>*& root, KeyType key) const
 	{
 		if (root)
 		{

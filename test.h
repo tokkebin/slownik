@@ -41,21 +41,29 @@ void test_int()
 	assert(dict.size() == 3);
 	assert(dict.value(2) == 4);
 
-	dict.show();
+	cout<<dict<<endl;
 
 
 	MultiSlownik<int, int> dict1;
     dict1.insert(0, 1);
     dict1.insert(5, 6);
     dict1.insert(1,2);
-    assert(dict1.compare_dict(dict,dict1)==false);
+    dict1.insert(3,4);
+    dict1.insert(8,9);
+    dict1.insert(9,10);
+    assert((dict1==dict)==false);
+    assert(dict1.size()==6);
+    dict1.delete_node(1,2);
+    assert(dict1.size() == 5);
     //cout<<dict1.compare_dict(dict,dict1)<<endl;
+
+    cout<<dict1<<endl;
 
 	MultiSlownik<int, int> dict2;
     dict2.insert(0, 1);
     dict2.insert(1, 2);
     dict2[2] = 3;
-    assert(dict2.compare_dict(dict,dict2)==true);
+    assert((dict2==dict)==true);
     //cout<<dict2.compare_dict(dict,dict2)<<endl;
 
 
@@ -98,18 +106,18 @@ void test_hist()
 	assert(dict_his.contains(hist1) == true);
 	assert(dict_his.value(hist1) == hist2);
 
-	dict_his.show();
 
+    cout<<dict_his<<endl;
 
 
 	MultiSlownik<histogram, histogram> dict_his1;
     dict_his1.insert(hist3, hist4);
     dict_his1.insert(hist1, hist2);
-    assert(dict_his1.compare_dict(dict_his,dict_his1)==false);
+    assert((dict_his1==dict_his)==false);
     //cout<<dict1.compare_dict(dict,dict1)<<endl;
 
 	MultiSlownik<histogram, histogram> dict_his2;
     dict_his2.insert(hist1, hist2);
-    assert(dict_his2.compare_dict(dict_his,dict_his2)==true);
+    assert((dict_his2==dict_his)==true);
 
 }
